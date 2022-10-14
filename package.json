@@ -1,0 +1,19 @@
+{
+  "name": "nctproyectc4-",
+  "version": "1.0.0",
+  "description": "Proyecto ciclo 4 desarrollo web Min Tic 2022",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NewCodeMin/NCTProyectC4-.git"
+  },
+  "author": "NewCodeTeam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NewCodeMin/NCTProyectC4-/issues"
+  },
+  "homepage": "https://github.com/NewCodeMin/NCTProyectC4-#readme"
+}
