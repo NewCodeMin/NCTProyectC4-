@@ -9,7 +9,7 @@ const Header = () => {
                         aria-controls="mynav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href=" ">
                         <div class="d-flex">
                             <img src="./images/logo.jpg" alt="" class="logoNav"></img>
 
@@ -30,14 +30,14 @@ const Header = () => {
                         </table>
                         <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href=" ">
                                     <div class="cart bg-purple">
                                         <span class="fas fa-shopping-cart text-white"></span>
                                     </div>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#"> <span class="fas fa-user pe-2"></span> Hello Jhon</a>
+                                <a class="nav-link" href=" "> <span class="fas fa-user pe-2"></span> Hello Jhon</a>
                             </li>
                         </ul>
                     </div>
