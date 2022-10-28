@@ -6,7 +6,7 @@ import Listaproadmin from './components/Listaproadmin';
 import ModificarProducto from './components/ModificarProductos';
 import Listaventaadmin from './components/Listaventaadmin';
 import VistaClientes from './components/VistaCliente';
-import Detallesdecompra from './components/Detallesdecompra';
+import DetallesdeProducto from './components/DetallesdeProducto';
 import CarritoUsuario from './components/CarritoUsuario';
 
 
@@ -24,10 +24,10 @@ function App() {
           <Routes>
           <Route path="/IngresarProducto" element={<IngresarProducto />}/>
           <Route path="/listaproductoadmin" element={<Listaproadmin />}/>
-          <Route path="/ModificarProducto" element={<ModificarProducto />}/>
+          <Route path="/ModificarProducto/:id" element={<ModificarProducto />}/>
           <Route path="/Listaventaadmin" element={< Listaventaadmin/>}/>
           <Route path="/VistaClientes" element={<VistaClientes />}/>
-          <Route path="/Detallesdecompra" element={<Detallesdecompra />}/>
+          <Route path="/DetallesProducto/:id" element={<DetallesdeProducto />}/>
           <Route path="/carrito" element={<CarritoUsuario />}/>
           </Routes>
         </div>
