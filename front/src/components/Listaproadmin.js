@@ -32,14 +32,14 @@ export const Listaproadmin = () => {
                       src={producto.imagen[0].url}
                       alt={producto.imagen[0].public_id}></img>
                     <div class='card-body d-flex flex-column'>
-                      <h5 id="titulo_producto"><Link to={`/producto/${producto._id}`}>{producto.nombre}</Link></h5>
+                      <h5 id="titulo_producto"><Link to={`/ModificarProducto/${producto._id}`}>{producto.nombre}</Link></h5>
                       <div class='rating mt-auto'>
                         <div class='rating-outer'>
                           <div class='rating-inner'></div>
                         </div>
                         <span id="Stock_Und">Stock {producto.inventario} Und</span>
                       </div>
-                      <p class='card-text'>${producto.precio}</p><Link to={`/producto/${producto._id}`} id="view_btn" class='btn btn-block'>
+                      <p class='card-text'>${producto.precio}</p><Link to={`/ModificarProducto/${producto._id}`} id="view_btn" class='btn btn-block'>
                         Modificar producto
                         </Link>
                       <button class="btn btn-danger" type="button">Eliminar</button>
