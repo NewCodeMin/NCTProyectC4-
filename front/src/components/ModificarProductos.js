@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const ModificarProducto = () => {
+export const ModificarProducto = () => {
     return (
         <Fragment>
         <section>
@@ -24,12 +24,6 @@ const ModificarProducto = () => {
                       <div class="d-flex align-items-center justify-content-between mt-1">
 
                         <ul class="list-inline small">
-                          <div class="form-group row">
-                            <label for="inputtext" class="col-sm-2 col-form-label">Id Articulo:</label>
-                            <div class="col-sm-10">
-                              <input type="text" class="form-control" id="inputPassword3" />
-                            </div>
-                          </div>
                           <div class="form-group row">
                             <label for="inputtext" class="col-sm-2 col-form-label">Nombre:</label>
                             <div class="col-sm-10">

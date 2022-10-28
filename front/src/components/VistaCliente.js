@@ -1,132 +1,57 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
+import MetaData from './layout/MetaData'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts } from '../actions/productActions'
+import { Link } from 'react-router-dom'
+import { useAlert } from 'react-alert'
 
-const VistaCliente = () => {
-    return (
+export const VistaCliente = () => {
+  const { loading, productos, error } = useSelector(state => state.products)
+  const alert = useAlert();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (error) {
+      return alert.error(error)
+    }
+    dispatch(getProducts());
+    alert.success("OK")
+  }, [dispatch])
+  return (
+    <Fragment>
+      {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
         <Fragment>
-              <section id="productos" class='container mt-5'>
-      <h1 id="encabezado_productos">Lista de productos cliente </h1>
-    <div class='row'>
-
-      <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
-        <div class='card1 p-3 rounded'>
-          <img class='card-img-top mx-auto'
-            src='https://bosico.vteximg.com.br/arquivos/ids/1710772-1500-1500/Calzado-ZMD8CF-CAFE_1.jpg?v=637804258723700000'
-            alt="Nutra gold"></img>
-          <div class='card-body d-flex flex-column'>
-            <h5 id="titulo_producto"><a href='http://localhost:3000'>ZAPATOS CASUALES PARA HOMBRE CELTAS</a></h5>
-            <div class='rating mt-auto'>
-              <div class='rating-outer'>
-                <div class='rating-inner'></div>
-              </div>
-              <span id="Stock_Und">Stock 30 Und</span>
+          <MetaData title="Ejemplo clase "></MetaData>
+          <h1 id="encabezado_productos">Lista de productos cliente </h1>
+          <section id="productos" class='container mt-5'>
+            <div class='row'>
+              {productos && productos.map(producto => (
+                <div key={producto._id} class='col-sm-12 col-md-6 col-lg-3 my-3'>
+                  <div class='card1 p-3 rounded'>
+                    <img class='card-img-top mx-auto'
+                      src={producto.imagen[0].url}
+                      alt={producto.imagen[0].public_id}>
+                    </img>
+                    <div class='card-body d-flex flex-column'>
+                      <h5 id="titulo_producto"><Link to={`/DetallesProducto/${producto._id}`}>{producto.nombre}</Link></h5>
+                      <div class='rating mt-auto'>
+                        <div class='rating-outer'>
+                          <div class='rating-inner'></div>
+                        </div>
+                        <span id="Stock_Und">Stock {producto.inventario} Und</span>
+                      </div>
+                      <p class='card-text'>${producto.precio}</p><Link to={`/DetallesProducto/${producto._id}`} id="view_btn" className='btn btn-block'>
+                        Ver detalle
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <p class='card-text'>$72.000</p><a href='http://localhost:3000' id="view_btn" class='btn btn-block'>
-              Ver detalle
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
-        <div class='card1 p-3 rounded'>
-          <img class='card-img-top mx-auto'
-            src='https://bosico.vteximg.com.br/arquivos/ids/1710772-1500-1500/Calzado-ZMD8CF-CAFE_1.jpg?v=637804258723700000'
-            alt="Nutra gold"></img>
-          <div class='card-body d-flex flex-column'>
-            <h5 id="titulo_producto"><a href='http://localhost:3000'>ZAPATOS CASUALES PARA HOMBRE CELTAS</a></h5>
-            <div class='rating mt-auto'>
-              <div class='rating-outer'>
-                <div class='rating-inner'></div>
-              </div>
-              <span id="Stock_Und">Stock 30 Und</span>
-            </div>
-            <p class='card-text'>$72.000</p><a href='http://localhost:3000' id="view_btn" class='btn btn-block'>
-              Ver detalle
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
-        <div class='card1 p-3 rounded'>
-          <img class='card-img-top mx-auto'
-            src='https://bosico.vteximg.com.br/arquivos/ids/1710772-1500-1500/Calzado-ZMD8CF-CAFE_1.jpg?v=637804258723700000'
-            alt="Nutra gold"></img>
-          <div class='card-body d-flex flex-column'>
-            <h5 id="titulo_producto"><a href='http://localhost:3000'>ZAPATOS CASUALES PARA HOMBRE CELTAS</a></h5>
-            <div class='rating mt-auto'>
-              <div class='rating-outer'>
-                <div class='rating-inner'></div>
-              </div>
-              <span id="Stock_Und">Stock 30 Und</span>
-            </div>
-            <p class='card-text'>$72.000</p><a href='http://localhost:3000' id="view_btn" class='btn btn-block'>
-              Ver detalle
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
-        <div class='card1 p-3 rounded'>
-          <img class='card-img-top mx-auto'
-            src='https://bosico.vteximg.com.br/arquivos/ids/1710772-1500-1500/Calzado-ZMD8CF-CAFE_1.jpg?v=637804258723700000'
-            alt="Nutra gold"></img>
-          <div class='card-body d-flex flex-column'>
-            <h5 id="titulo_producto"><a href='http://localhost:3000'>ZAPATOS CASUALES PARA HOMBRE CELTAS</a></h5>
-            <div class='rating mt-auto'>
-              <div class='rating-outer'>
-                <div class='rating-inner'></div>
-              </div>
-              <span id="Stock_Und">Stock 30 Und</span>
-            </div>
-            <p class='card-text'>$72.000</p><a href='http://localhost:3000' id="view_btn" class='btn btn-block'>
-              Ver detalle
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
-        <div class='card1 p-3 rounded'>
-          <img class='card-img-top mx-auto'
-            src='https://bosico.vteximg.com.br/arquivos/ids/1710772-1500-1500/Calzado-ZMD8CF-CAFE_1.jpg?v=637804258723700000'
-            alt="Nutra gold"></img>
-          <div class='card-body d-flex flex-column'>
-            <h5 id="titulo_producto"><a href='http://localhost:3000'>ZAPATOS CASUALES PARA HOMBRE CELTAS</a></h5>
-            <div class='rating mt-auto'>
-              <div class='rating-outer'>
-                <div class='rating-inner'></div>
-              </div>
-              <span id="Stock_Und">Stock 30 Und</span>
-            </div>
-            <p class='card-text'>$72.000</p><a href='http://localhost:3000' id="view_btn" class='btn btn-block'>
-              Ver detalle
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
-        <div class='card1 p-3 rounded'>
-          <img class='card-img-top mx-auto'
-            src='https://bosico.vteximg.com.br/arquivos/ids/1710772-1500-1500/Calzado-ZMD8CF-CAFE_1.jpg?v=637804258723700000'
-            alt="Nutra gold"></img>
-          <div class='card-body d-flex flex-column'>
-            <h5 id="titulo_producto"><a href='http://localhost:3000'>ZAPATOS CASUALES PARA HOMBRE CELTAS</a></h5>
-            <div class='rating mt-auto'>
-              <div class='rating-outer'>
-                <div class='rating-inner'></div>
-              </div>
-              <span id="Stock_Und">Stock 30 Und</span>
-            </div>
-            <p class='card-text'>$72.000</p><a href='http://localhost:3000' id="view_btn" class='btn btn-block'>
-              Ver detalle
-            </a>
-          </div>
-        </div>
-      </div>
-      </div> 
-  </section>
-  
-
+          </section>
         </Fragment>
-    )
+      )}
+    </Fragment>
+  )
 }
 
-export default  VistaCliente
+export default VistaCliente
