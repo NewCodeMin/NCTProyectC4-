@@ -8,6 +8,7 @@ import Listaventaadmin from './components/Listaventaadmin';
 import VistaClientes from './components/VistaCliente';
 import DetallesdeProducto from './components/DetallesdeProducto';
 import CarritoUsuario from './components/CarritoUsuario';
+import Home from './components/Home';
 
 
 //Router traido desde react-router-dom (no confundir con el de express)
@@ -22,6 +23,8 @@ function App() {
         <Header />
         <div className='container container-fluid'>
           <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/Home" element={<Home />}/>
           <Route path="/IngresarProducto" element={<IngresarProducto />}/>
           <Route path="/listaproductoadmin" element={<Listaproadmin />}/>
           <Route path="/ModificarProducto/:id" element={<ModificarProducto />}/>
