@@ -13,7 +13,7 @@ const IngresarProductos = () => {
                 <li class="list-group-item">
                   <h3 class="mt-0 mb-1">Ingresar productos</h3>
                   <div class="media align-items-lg-center flex-column flex-lg-row">
-                  <img src="./images/zapatos deportivos.png"  alt="logo" id="imgingresarproducto"/>  
+                  <img src="./images/zapatos_deportivos.png"  alt="logo" id="imgingresarproducto"/>  
 
                     <div class="media-body order-2 order-lg-2 ml-lg-5">
 
