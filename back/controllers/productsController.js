@@ -17,6 +17,28 @@ exports.getProducts=async(req,res,next) =>{
         productos
     })
 }
+//Ver lista de productos disponibles
+exports.getProductsDisp=async(req,res,next) =>{
+    const productos = await producto.find();
+    const productosDispo = [];
+    for (i = 0; i < productos.length; i++) {
+        if(productos[i].inventario > 0){
+            productosDispo.push(productos[i]);
+        }
+    } 
+    if (!productosDispo){
+        return res.status(404).json({
+            success:false,
+            error:true
+        })
+    }
+
+    res.status(200).json({
+        sucess:true,
+        cantidad: productosDispo.length,
+        productosDispo
+    })
+}
 
 //Ver un producto por ID
 exports.getProductsById= async(req,res,next) =>{
