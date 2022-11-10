@@ -28,6 +28,13 @@ exports.getProductsById= async(req,res,next) =>{
             error:true
         })
     }
+    if(product.inventario <= 0){
+        return res.status(404).json({
+            sucess:false,
+            message: 'Producto agotado',
+            error:true
+        })
+    }
     res.status(200).json({
         sucess:true,
         message: "Aqui abajo encuenta informacion sobre el producto: ",
