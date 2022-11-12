@@ -42,10 +42,7 @@ exports.getProductsById= catchAsyncErrors(async(req,res,next) =>{
     if (!product){
         return next(new ErrorHandler("Producto no encontrado", 404))
     }
-    if(product.inventario <= 0){
-        return next(new ErrorHandler("Producto agotado", 404))
-    }
-    res.status(200).json({
+        res.status(200).json({
         sucess:true,
         message: "Aqui abajo encuenta informacion sobre el producto: ",
         product
