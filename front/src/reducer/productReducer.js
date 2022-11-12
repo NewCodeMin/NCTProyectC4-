@@ -2,6 +2,9 @@ import {
     ALL_PRODUCTS_REQUEST,
     ALL_PRODUCTS_SUCCESS,
     ALL_PRODUCTS_FAIL,
+    ALL_PRODUCTSDISPO_REQUEST,
+    ALL_PRODUCTSDISPO_SUCCESS,
+    ALL_PRODUCTSDISPO_FAIL,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAIL,
@@ -24,6 +27,39 @@ export const productsReducer = (state = { products: [] }, action) => {
             }
 
         case ALL_PRODUCTS_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+//REDUCER PARA TENER LISTA DE PRODUCTOS DISPONIIBLES
+export const productsDispReducer = (state = { productsDispo: [] }, action) => {
+    switch (action.type) {
+        case ALL_PRODUCTSDISPO_REQUEST:
+            return {
+                loading: true,
+                productosDispo: []
+            }
+
+        case ALL_PRODUCTSDISPO_SUCCESS:
+            return {
+                loading: false,
+                productosDispo: action.payload.productosDispo,
+                cantidad: action.payload.cantidad
+            }
+
+        case ALL_PRODUCTSDISPO_FAIL:
             return {
                 loading: false,
                 error: action.payload

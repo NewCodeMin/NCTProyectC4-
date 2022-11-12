@@ -56,6 +56,7 @@ exports.myOrders= catchAsyncErrors(async(req,res, next)=>{
         orders
     })
 })
+
 //Finalizar orden
 exports.finishOrder = catchAsyncErrors(async(req,res,next) => {
     let order= await Order.findById(req.params.id).populate("user", "nombre email") //restriccion de usuario
