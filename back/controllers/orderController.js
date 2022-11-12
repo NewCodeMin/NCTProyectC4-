@@ -64,8 +64,9 @@ exports.finishOrder = catchAsyncErrors(async(req,res,next) => {
         return next(new ErrorHandler("No encontramos una orden con ese Id",404))
     }
    //Si el objeto existe
-   order = await  Order.findByIdAndUpdate(req.params.id)
-    order.estado = "Prueba"
+   order.estado = "Finalizado";
+   order = await  Order.findByIdAndUpdate(req.params.id, order)
+    
     let itemsProd = [];
     itemsProd = order.items;
     let idProducts = [];
