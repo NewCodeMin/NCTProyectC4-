@@ -1,19 +1,19 @@
 import React, { Fragment, useEffect } from 'react'
 import MetaData from './layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../actions/productActions'
+import { getProductsDispo } from '../actions/productActions'
 import { Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
 
 export const VistaCliente = () => {
-  const { loading, productos, error } = useSelector(state => state.products)
+  const { loading, productosDispo, error } = useSelector(state => state.productsDispo)
   const alert = useAlert();
   const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
       return alert.error(error)
     }
-    dispatch(getProducts());
+    dispatch(getProductsDispo());
     alert.success("OK")
   }, [dispatch])
   return (
@@ -24,7 +24,7 @@ export const VistaCliente = () => {
           <h1 id="encabezado_productos">Lista de productos cliente </h1>
           <section id="productos" class='container mt-5'>
             <div class='row'>
-              {productos && productos.map(producto => (
+              {productosDispo && productosDispo.map(producto => (
                 <div key={producto._id} class='col-sm-12 col-md-6 col-lg-3 my-3'>
                   <div class='card1 p-3 rounded'>
                     <img class='card-img-top mx-auto'
