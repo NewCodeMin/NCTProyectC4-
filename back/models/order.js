@@ -74,6 +74,11 @@ const orderSchema = mongoose.Schema({
         required: true,
         default: 0.0
     },
+    descuento:{
+        type:Number,
+        required: true,
+        defautl: 0.0
+    },
     precioImpuesto:{
         type:Number,
         required: true,
