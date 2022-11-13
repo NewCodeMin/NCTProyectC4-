@@ -8,17 +8,32 @@ exports.newOrder= catchAsyncErrors (async (req, res, next)=>{
     const {
         items,
         envioInfo,
-        precioItems,
-        precioImpuesto,
-        precioEnvio,
-        precioTotal,
+        descuento = 0.14,
+        precioEnvio = 12000,
+        precioImpuesto = 0.19,
         pagoInfo
     } = req.body;
-
+    const idProducts = [];
+    const listPrecio = [];
+    for (i = 0 ; i < items.length;i++){
+        idProducts.push(items[i].producto);
+        const product = await producto.findById(items[i].producto);
+        listPrecio.push(product.precio * items[i].cantidad);
+        items[i].nombre = product.nombre;
+        items[i].marca = product.marca;
+        items[i].talla = product.talla;
+        items[i].precio = product.precio;
+        items[i].imagen = product.imagen[0].url;
+    }
+    let total  = 0;
+    listPrecio.forEach(function(a){total += a;});
+    let precioItems = total;
+    let precioTotal = precioItems + (precioItems * precioImpuesto) + precioEnvio - (precioItems *descuento)
     const order= await Order.create({
         items,
         envioInfo,
         precioItems,
+        descuento,
         precioImpuesto,
         precioEnvio,
         precioTotal,
@@ -28,7 +43,6 @@ exports.newOrder= catchAsyncErrors (async (req, res, next)=>{
     })
 
     res.status(201).json({
-        success:true,
         order
     })
 })
@@ -56,7 +70,6 @@ exports.myOrders= catchAsyncErrors(async(req,res, next)=>{
         orders
     })
 })
-
 //Finalizar orden
 exports.finishOrder = catchAsyncErrors(async(req,res,next) => {
     let order= await Order.findById(req.params.id).populate("user", "nombre email") //restriccion de usuario
