@@ -16,7 +16,7 @@ export const Listaproadmin = () => {
     }
     dispatch(getProducts());
     alert.success("OK")
-  }, [dispatch])
+  }, [dispatch,error,alert])
   return (
     <Fragment>
       {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (

@@ -15,7 +15,8 @@ export const VistaCliente = () => {
     }
     dispatch(getProductsDispo());
     alert.success("OK")
-  }, [dispatch])
+      return alert.error(error)
+  }, [dispatch,alert,error])
   return (
     <Fragment>
       {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
