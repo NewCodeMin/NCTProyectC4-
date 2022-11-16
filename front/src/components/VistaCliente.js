@@ -21,7 +21,7 @@ export const VistaCliente = () => {
     <Fragment>
       {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
         <Fragment>
-          <MetaData title="Ejemplo clase "></MetaData>
+          <MetaData title="Vista Cliente "></MetaData>
           <h1 id="encabezado_productos">Lista de productos cliente </h1>
           <section id="productos" class='container mt-5'>
             <div class='row'>
@@ -35,9 +35,7 @@ export const VistaCliente = () => {
                     <div class='card-body d-flex flex-column'>
                       <h5 id="titulo_producto"><Link to={`/DetallesProducto/${producto._id}`}>{producto.nombre}</Link></h5>
                       <div class='rating mt-auto'>
-                        <div class='rating-outer'>
-                          <div class='rating-inner'></div>
-                        </div>
+                       
                         <span id="Stock_Und">Stock {producto.inventario} Und</span>
                       </div>
                       <p class='card-text'>${producto.precio}</p><Link to={`/DetallesProducto/${producto._id}`} id="view_btn" className='btn btn-block'>
