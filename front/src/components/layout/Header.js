@@ -1,6 +1,19 @@
 import React, { Fragment } from 'react'
+import { Link } from "react-router-dom";
+import {  useDispatch, useSelector } from "react-redux";
+import { useAlert } from 'react-alert'
+import { logout} from "../../actions/userActions"
 
 const Header = () => {
+  const alert= useAlert();
+  const dispatch= useDispatch();
+
+  const { user, loading } = useSelector((state) => state.auth);
+
+  const logoutHandler = () =>{
+        dispatch(logout());
+        alert.success("LogOut exitoso")
+  }
     return (
         <Fragment>
             <nav class="navbar navbar-dark bg-white ">
@@ -17,6 +30,63 @@ const Header = () => {
                     <span class="navbar-toggler-icon"></span>
                   </button>
             <a class="nav-link" href=" "> <span class="fa fa-shopping-cart"  id="cart_shopping"></span> <span className="ml-0" id="cart_count">0</span> </a>
+            {user ? (
+                  <div className="ml-1 dropdown d-inline">
+                    <Link
+                      to="#!"
+                      className="nav-link dropdown-toggle"
+                      id="navbarDropdownMenuLink"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <figure className="avatar avatar-nav">
+                        <img
+                          src={user.avatar && user.avatar.url}
+                          alt={user && user.nombre}
+                          className="rounded-circle"
+                        ></img>
+                      </figure>
+
+                      <span id="nombreUsuario"> {user && user.nombre}</span>
+
+                    </Link>
+                    <div
+                      className="dropdown-menu"
+                      aria-labelledby="dropDownMenu"
+                    >
+                      {/*Preguntamos el rol de quien esta online*/}
+                      {user && user.role === "admin" && (
+                        <Link className="dropdown-item" to="/dashboard">
+                          Adm. Productos
+                        </Link>
+                      )}
+
+                      <Link className="dropdown-item" to="/">
+                        Pedidos
+                      </Link>
+                      <Link className="dropdown-item" to="/yo">
+                        Mi Perfil
+                      </Link>
+                      <Link className="dropdown-item" to="/" onClick={logoutHandler}>Cerrar Sesion</Link>
+                    </div>
+                  </div>
+                ) : (
+                  !loading && (
+                    <div className="d-flex flex-row-reverse">
+                      <Link className="nav-link" to="/register">
+                        {" "}
+                        <span className="fa fa-user-plus "></span> Crear
+                        cuenta
+                      </Link>
+                      <Link className="nav-link" to="/login">
+                        {" "}
+                        <span className="fas fa-user pe-2   "></span>
+                        Ingresar
+                      </Link>
+                    </div>
+                  )
+                )}
            </div>
            </div>
            </div>
@@ -27,14 +97,7 @@ const Header = () => {
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                    <div class="navtobbler"> 
-                        <div class="d-flex ">
-                        <button  type="button" href=" " id="botoningresar"> <span class="fas fa-user pe-2   "></span>Ingresar</button>
-                        <button  type="button"  href=" " id="botoningresar"> <span class="fa fa-user-plus "></span> Crear cuenta</button>
-                    </div>
-                    </div>
-                </li>
+                
                 <li class="nav-item">
                   <a class="nav-link" href=" ">Mujer</a>
                 </li>

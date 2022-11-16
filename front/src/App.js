@@ -1,5 +1,5 @@
 import './styles.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/layout/Header';
 import IngresarProducto from './components/IngresarProductos';
 import Listaproadmin from './components/Listaproadmin';
@@ -8,7 +8,12 @@ import Listaventaadmin from './components/Listaventaadmin';
 import VistaClientes from './components/VistaCliente';
 import DetallesdeProducto from './components/DetallesdeProducto';
 import CarritoUsuario from './components/CarritoUsuario';
+import { Login } from './components/user/Login';
 import Home from './components/Home';
+import { loadUser } from './actions/userActions';
+import store from "./store"
+import { Register } from './components/user/Register';
+import { Profile } from './components/user/Profile';
 
 
 //Router traido desde react-router-dom (no confundir con el de express)
@@ -17,6 +22,9 @@ import { BrowserRouter as Router,Route , Routes } from 'react-router-dom';
 
 
 function App() {
+  useEffect(()=>{
+    store.dispatch(loadUser())
+   },[])
   return (
     <Router>
     <div className="App">
@@ -32,6 +40,10 @@ function App() {
           <Route path="/VistaClientes" element={<VistaClientes />}/>
           <Route path="/DetallesProducto/:id" element={<DetallesdeProducto />}/>
           <Route path="/carrito" element={<CarritoUsuario />}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element= {<Register />} />
+          <Route path="/yo" element={<Profile />}/>
+          
           </Routes>
         </div>
       
