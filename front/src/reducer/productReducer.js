@@ -16,14 +16,16 @@ export const productsReducer = (state = { products: [] }, action) => {
         case ALL_PRODUCTS_REQUEST:
             return {
                 loading: true,
-                productos: []
+                products: []
             }
 
         case ALL_PRODUCTS_SUCCESS:
             return {
                 loading: false,
-                productos: action.payload.productos,
-                cantidad: action.payload.cantidad
+                products: action.payload.products,
+                productsCount: action.payload.productsCount,
+                resPerPage: action.payload.resPerPage, // conectamos el back con el fornt 
+                filteredProductsCount: action.payload.filteredProductsCount
             }
 
         case ALL_PRODUCTS_FAIL:
@@ -44,7 +46,7 @@ export const productsReducer = (state = { products: [] }, action) => {
 }
 
 //REDUCER PARA TENER LISTA DE PRODUCTOS DISPONIIBLES
-export const productsDispReducer = (state = { productsDispo: [] }, action) => {
+export const productsDispReducer = (state = { productosDispo: [] }, action) => {
     switch (action.type) {
         case ALL_PRODUCTSDISPO_REQUEST:
             return {
@@ -56,7 +58,10 @@ export const productsDispReducer = (state = { productsDispo: [] }, action) => {
             return {
                 loading: false,
                 productosDispo: action.payload.productosDispo,
-                cantidad: action.payload.cantidad
+                cantidad: action.payload.cantidad,
+                productsCount: action.payload.productsCount,
+                resPerPage: action.payload.resPerPage, // conectamos el back con el fornt 
+                filteredProductsCount: action.payload.filteredProductsCount
             }
 
         case ALL_PRODUCTSDISPO_FAIL:

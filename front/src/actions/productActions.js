@@ -13,11 +13,12 @@ import {
     CLEAR_ERRORS
 } from '../constants/productConstants';
 
-export const getProducts = () => async(dispatch)=>{
+export const getProducts = ( currentPage =1,keyword='') => async(dispatch)=>{
     try {
         dispatch({type: ALL_PRODUCTS_REQUEST})
 
-        const {data} = await axios.get('api/productos')
+        let link=`/api/productos?keyword=${keyword}&page=${currentPage}`
+        const {data} = await axios.get(link)
 
         dispatch({
             type:ALL_PRODUCTS_SUCCESS,
@@ -32,11 +33,12 @@ export const getProducts = () => async(dispatch)=>{
 }
 
 //VER PRODUCTOS DISPONIBLES
-export const getProductsDispo = () => async(dispatch)=>{
+export const getProductsDispo = ( currentPage =1,keyword='') => async(dispatch)=>{
     try {
         dispatch({type: ALL_PRODUCTSDISPO_REQUEST})
 
-        const {data} = await axios.get('api/productosDispo')
+        let link=`/api/productosDispo?keyword=${keyword}&page=${currentPage}`
+        const {data} = await axios.get(link)
 
         dispatch({
             type:ALL_PRODUCTSDISPO_SUCCESS,

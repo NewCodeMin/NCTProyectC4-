@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Search from "./search";
 import { Link } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
 import { useAlert } from 'react-alert'
@@ -18,11 +19,8 @@ const Header = () => {
         <Fragment>
             <nav class="navbar navbar-dark bg-white ">
         <div class="container-fluid">
-            <img src="./images/bannert.png "  alt="logo" id = "imagenavbar"/>  
-          <form class="d-flex " id="buscador" role="search">
-            <input class="form-control me-2 id " id= "buscarnav" type="search" placeholder="¿Qué buscas?" aria-label="Search"/>
-            <button class="btn btn-success "  id= "buscarbotom" type="submit">Buscar</button>
-          </form>
+            <img src="../images/bannert.png "  alt="logo" id = "imagenavbar"/>  
+            <Search />
           <div class="navbar-brand  d-md-flex ">
             <div class="final"> 
             <div class="d-flex flex-row-reverse">
