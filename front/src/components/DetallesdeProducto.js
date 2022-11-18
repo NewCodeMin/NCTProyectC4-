@@ -4,6 +4,7 @@ import MetaData from "../components/layout/MetaData"
 import { useParams } from 'react-router-dom'
 import { getProductDetails, clearErrors } from '../actions/productActions'
 import { useAlert } from 'react-alert'
+import { addItemToCart } from '../actions/cartActions'
 
 export const DetallesdeProducto = () => {
   const { loading, product, error } = useSelector(state => state.productDetails)
@@ -38,6 +39,11 @@ export const DetallesdeProducto = () => {
 
     const qty = contador.valueAsNumber - 1;
     setQuantity(qty)
+  }
+
+  const addToCart = () => {
+    dispatch(addItemToCart(id, quantity));
+    alert.success('Producto agregado al carro')
   }
   return (
     <Fragment>
@@ -117,7 +123,7 @@ export const DetallesdeProducto = () => {
                                 <input type="number" className="countlab count d-inline"  value={quantity} readOnly />
                                 <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                               </div>
-                              <button class="btn btn-danger" id="carrito_btn" type="button" disabled={product.inventario === 0}>Agregar al Carrito</button>
+                              <button class="btn btn-danger" id="carrito_btn" type="button" disabled={product.inventario === 0} onClick={addToCart}>Agregar al Carrito</button>
                               <div class="mt-3"><button class="btn btn-dark mr-2" type="button">ATRAS</button>
                               </div>
                             </ul>
