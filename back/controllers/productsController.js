@@ -2,6 +2,7 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const producto=require("../models/productos");
 const APIFeatures = require("../utils/apiFeatures");
 const fetch = (url) => import('node-fetch').then(({default:fetch}) => fetch(url)); //usurpación del require
+const cloudinary=require("cloudinary")
 
 //Ver lista de productos
 exports.getProducts=catchAsyncErrors(async (req,res,next) =>{
@@ -68,30 +69,76 @@ exports.getProductsById= catchAsyncErrors(async(req,res,next) =>{
 })
 
 //Crear nuevo producto /api/productos
-exports.newProduct= catchAsyncErrors(async(req,res,next) =>{
-    const product= await producto.create(req.body);
+exports.newProduct = catchAsyncErrors(async (req, res, next) => {
+    let imagen=[]
+    if(typeof req.body.imagen==="string"){
+        imagen.push(req.body.imagen)
+    }else{
+        imagen=req.body.imagen
+    }
 
+    let imagenLink=[]
+
+    for (let i=0; i<imagen.length;i++){
+        const result = await cloudinary.v2.uploader.upload(imagen[i],{
+            folder:"products"
+        })
+        imagenLink.push({
+            public_id:result.public_id,
+            url: result.secure_url
+        })
+    }
+
+    req.body.imagen=imagenLink
+    req.body.user = req.user.id;
+    const product = await producto.create(req.body);
     res.status(201).json({
-        sucess:true,
+        success: true,
         product
     })
 })
 
 //Update un producto
-exports.updateProduct= catchAsyncErrors(async (req,res,next) =>{
-    let product = await producto.findById(req.params.id) //Variable tipo modificable
-    if (!product){
+exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
+    let product = await producto.findById(req.params.id) //Variable de tipo modificable
+    if (!product) {
         return next(new ErrorHandler("Producto no encontrado", 404))
     }
-    // Si el objeto si existe, entonces si ejecuto la actualizacion
-    product= await producto.findByIdAndUpdate(req.params.id, req.body, {
-        new: true, //solo tenga en cuenta lo nuevo
-        runValidators: true //valide los datos nuevos
+    let imagen=[]
+
+    if (typeof req.body.imagen=="string"){
+        imagen.push(req.body.imagen)
+    }else{
+        imagen=req.body.imagen
+    }
+    if (imagen!== undefined){
+        //eliminar imagenes asociadas con el product
+        for (let i=0; i<product.imagen.lenght; i++){
+            const result= await cloudinary.v2.uploader.destroy(product.images[i].public_id)
+        }
+
+        let imageLinks=[]
+        for (let i=0; i<imagen.lenght; i++){
+            const result=await cloudinary.v2.uploader.upload(imagen[i],{
+                folder:"products"
+            });
+            imageLinks.push({
+                public_id:result.public_id,
+                url: result.secure_url
+            })
+        }
+        req.body.imagen=imageLinks
+    }
+
+    //Si el objeto si existia, entonces si ejecuto la actualización
+    product = await producto.findByIdAndUpdate(req.params.id, req.body, {
+        new: true, //Valido solo los atributos nuevos o actualizados
+        runValidators: true
     });
-    //Respondo OK si el producto si se actualizó
+    //Respondo Ok si el producto si se actualizó
     res.status(200).json({
-        sucess: true,
-        message:"Producto actualizado correctamente",
+        success: true,
+        message: "Producto actualizado correctamente",
         product
     })
 })
