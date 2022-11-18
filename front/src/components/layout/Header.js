@@ -6,6 +6,7 @@ import { useAlert } from 'react-alert'
 import { logout} from "../../actions/userActions"
 
 const Header = () => {
+  const {cartItems} = useSelector(state=>state.cart)
   const alert= useAlert();
   const dispatch= useDispatch();
 
@@ -27,7 +28,8 @@ const Header = () => {
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-            <a class="nav-link" href=" "> <span class="fa fa-shopping-cart"  id="cart_shopping"></span> <span className="ml-0" id="cart_count">0</span> </a>
+            <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
+                  <span className="ml-1" id="cart_count">{cartItems.length}</span></Link>
             {user ? (
                   <div className="ml-1 dropdown d-inline">
                     <Link
