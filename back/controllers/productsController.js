@@ -30,28 +30,12 @@ exports.getProducts=catchAsyncErrors(async (req,res,next) =>{
 })
 //Ver lista de productos disponibles
 exports.getProductsDisp=catchAsyncErrors(async(req,res,next) =>{
-    //const productos = await producto.find();
-   // const productosDispo = [];
-    //for (i = 0; i < productos.length; i++) {
-       // if(productos[i].inventario > 0){
-           // productosDispo.push(productos[i]);
-       // }
-    //} 
-   // if (!productosDispo){
-   //     return next(new ErrorHandler("Informacion no encontrada", 404))
-   // }
-
-   // res.status(200).json({
-        //sucess:true,
-       // cantidad: productosDispo.length,
-       // productosDispo
-   // })
-//})//*
     //paginacion 
     const resPerPage = 4;
-    const productsCount = await producto.countDocuments();
+    let contadoCondicion = await producto.find({inventario: {$gte: 1}})
+    let productsCount = await contadoCondicion.length;
 
-    const apiFeatures = new APIFeatures(producto.find(), req.query)
+    const apiFeatures = new APIFeatures(producto.find({inventario: {$gte: 1}}), req.query)
         .search();
         
 
