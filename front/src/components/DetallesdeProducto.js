@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { getProductDetails, clearErrors } from '../actions/productActions'
 import { useAlert } from 'react-alert'
 import { addItemToCart } from '../actions/cartActions'
+import { Link } from 'react-router-dom'
 
 export const DetallesdeProducto = () => {
   const { loading, product, error } = useSelector(state => state.productDetails)
@@ -63,7 +64,7 @@ export const DetallesdeProducto = () => {
 
                         {product.imagen && product.imagen.map(img => (
                           <div key={img.public_id}>
-                            <img src={"../" + img.url} alt={product.nombre} width="250" height="200" class="order-1 order-lg-1"></img>
+                            <img src={img.url} alt={product.nombre} width="250" height="200" class="order-1 order-lg-1"></img>
                           </div>
                         ))}
 
@@ -120,11 +121,14 @@ export const DetallesdeProducto = () => {
                               </div>
                               <div className="stockCounter d-inline">
                                 <span className="btn btn-danger minus" onClick={decreaseQty}>-</span>
-                                <input type="number" className="countlab count d-inline"  value={quantity} readOnly />
+                                <input type="number" className="countlab count d-inline" value={quantity} readOnly />
                                 <span className="btn btn-primary plus" onClick={increaseQty}>+</span>
                               </div>
                               <button class="btn btn-danger" id="carrito_btn" type="button" disabled={product.inventario === 0} onClick={addToCart}>Agregar al Carrito</button>
-                              <div class="mt-3"><button class="btn btn-dark mr-2" type="button">ATRAS</button>
+                              <div class="mt-3">
+                                <Link to="/VistaClientes">
+                                  <button class="btn btn-dark mr-2" type="button" >ATRAS</button>
+                                </Link>
                               </div>
                             </ul>
 

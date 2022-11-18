@@ -33,6 +33,12 @@ export const Listaproadmin = () => {
           <MetaData title="Tienda tenis "></MetaData>
           <h1 id="encabezado_productos">Lista de productos administrador </h1>
           <section id="productos" class='container mt-5'>
+            <div class='col-sm-12 col-md-6 col-lg-3 my-3'>
+            <Link to={`/IngresarProducto`} class='btn btn-success' type='submit'>
+                        Ingresar producto
+                        </Link>
+            </div>
+          
             <div class='row'>
               {products && products.map(producto => (
                 <div key={producto._id} class='col-sm-12 col-md-6 col-lg-3 my-3'>
