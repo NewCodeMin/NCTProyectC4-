@@ -161,6 +161,7 @@ const IngresarProductos = () => {
                                         id='customFile'
                                         accept="images/*"
                                         onChange={onChange}
+                                        multiple
                                       />
                                       <label className='custom-file-label' htmlFor='customFile'>
                                         Escoger Imagen

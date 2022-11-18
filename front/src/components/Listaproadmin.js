@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from './layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../actions/productActions'
+import { deleteProduct, getProducts } from '../actions/productActions'
 import { useAlert } from 'react-alert'
 import Pagination from 'react-js-pagination'
 import {  useParams, Link } from 'react-router-dom'
@@ -13,6 +13,14 @@ export const Listaproadmin = () => {
     const { loading, products, error, resPerPage, productsCount } = useSelector(state => state.products)
     const alert = useAlert();
 
+    const deleteProductHandler= (id)=> {
+      const response=window.confirm("Esta seguro de querer borrar este producto?")
+      if (response){
+          dispatch(deleteProduct(id))
+          alert.success("Producto eliminado correctamente")
+          window.location.reload(false)
+      }
+  }
   const dispatch = useDispatch();
   useEffect(() => {
       if (error) {
@@ -55,7 +63,7 @@ export const Listaproadmin = () => {
                       <p class='card-text'>${producto.precio}</p><Link to={`/ModificarProducto/${producto._id}`} id="view_btn" class='btn btn-block'>
                         Modificar producto
                         </Link>
-                      <button class="btn btn-danger" type="button">Eliminar</button>
+                      <button class="btn btn-danger" type="button" onClick={() => deleteProductHandler(producto._id)}>Eliminar</button>
                     </div>
                   </div>
                 </div>
