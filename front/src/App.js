@@ -25,6 +25,8 @@ import { Success } from './components/Success'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ListOrder } from './components/order/ListOrder';
 import { OrderDetails } from './components/order/OrderDetails';
+import OrdersList from './components/order/OrderList.js';
+import ProcessOrder from './components/order/ProccessOrder';
 
 
 
@@ -71,6 +73,12 @@ function App() {
 
             <Route path="/order/:id"
               element={<ProtectedRoute><OrderDetails /></ProtectedRoute>} />
+
+            <Route path="/orderList"
+              element={<ProtectedRoute isAdmin={true}><OrdersList /></ProtectedRoute>} />
+
+            <Route path="/admin/order/:id"
+              element={<ProtectedRoute isAdmin={true}><ProcessOrder /></ProtectedRoute>} />
           </Routes>
         </div>
 

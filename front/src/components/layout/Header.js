@@ -1,36 +1,36 @@
 import React, { Fragment } from 'react'
 import Search from "./search";
 import { Link } from "react-router-dom";
-import {  useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from 'react-alert'
-import { logout} from "../../actions/userActions"
+import { logout } from "../../actions/userActions"
 
 const Header = () => {
-  const {cartItems} = useSelector(state=>state.cart)
-  const alert= useAlert();
-  const dispatch= useDispatch();
+  const { cartItems } = useSelector(state => state.cart)
+  const alert = useAlert();
+  const dispatch = useDispatch();
 
   const { user, loading } = useSelector((state) => state.auth);
 
-  const logoutHandler = () =>{
-        dispatch(logout());
-        alert.success("LogOut exitoso")
+  const logoutHandler = () => {
+    dispatch(logout());
+    alert.success("LogOut exitoso")
   }
-    return (
-        <Fragment>
-            <nav class="navbar navbar-dark bg-white ">
+  return (
+    <Fragment>
+      <nav class="navbar navbar-dark bg-white ">
         <div class="container-fluid">
-            <img src="../images/bannert.png "  alt="logo" id = "imagenavbar"/>  
-            <Search />
+          <img src="../images/bannert.png " alt="logo" id="imagenavbar" />
+          <Search />
           <div class="navbar-brand  d-md-flex ">
-            <div class="final"> 
-            <div class="d-flex flex-row-reverse">
+            <div class="final">
+              <div class="d-flex flex-row-reverse">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-            <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
                   <span className="ml-1" id="cart_count">{cartItems.length}</span></Link>
-            {user ? (
+                {user ? (
                   <div className="ml-1 dropdown d-inline">
                     <Link
                       to="#!"
@@ -61,9 +61,15 @@ const Header = () => {
                           Adm. Productos
                         </Link>
                       )}
-                       {user && user.role === "admin" && (
+                      {user && user.role === "admin" && (
                         <Link className="dropdown-item" to="/Listaventaadmin">
                           Mis ventas
+                        </Link>
+                      )}
+
+                      {user && user.role === "admin" && (
+                        <Link className="dropdown-item" to="/orderList">
+                          Administrar pedidos
                         </Link>
                       )}
 
@@ -92,9 +98,9 @@ const Header = () => {
                     </div>
                   )
                 )}
-           </div>
-           </div>
-           </div>
+              </div>
+            </div>
+          </div>
           <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Tienda de zapatos deportivos</h5>
@@ -102,7 +108,7 @@ const Header = () => {
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                
+
                 <li class="nav-item">
                   <a class="nav-link" href=" ">Mujer</a>
                 </li>
@@ -123,8 +129,8 @@ const Header = () => {
           </div>
         </div>
       </nav>
-        </Fragment>
-    )               
+    </Fragment>
+  )
 }
 
 export default Header
