@@ -14,6 +14,7 @@ import { loadUser } from './actions/userActions';
 import store from "./store"
 import { Register } from './components/user/Register';
 import { Profile } from './components/user/Profile';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 
 //Router traido desde react-router-dom (no confundir con el de express)
@@ -34,10 +35,6 @@ function App() {
           <Route path="/" element={<Home />}/>
           <Route path="/Home" element={<Home />}/>
           <Route path="/Search/:keyword" element={<VistaClientes />}/>
-          <Route path="/IngresarProducto" element={<IngresarProducto />}/>
-          <Route path="/listaproductoadmin" element={<Listaproadmin />}/>
-          <Route path="/ModificarProducto/:id" element={<ModificarProducto />}/>
-          <Route path="/Listaventaadmin" element={< Listaventaadmin/>}/>
           <Route path="/VistaClientes" element={<VistaClientes />}/>
           <Route path="/DetallesProducto/:id" element={<DetallesdeProducto />}/>
           <Route path="/carrito" element={<CarritoUsuario />}/>
@@ -45,7 +42,11 @@ function App() {
           <Route path="/register" element= {<Register />} />
           <Route path="/yo" element={<Profile />}/>
           
-          
+          {/*Ruta protegida*/}
+          <Route path="/IngresarProducto" element={<ProtectedRoute isAdmin={true}><IngresarProducto /></ProtectedRoute>} />
+          <Route path="/listaproductoadmin" element={<ProtectedRoute isAdmin={true}><Listaproadmin /></ProtectedRoute>}/>
+          <Route path="/ModificarProducto/:id" element={<ProtectedRoute isAdmin={true}><ModificarProducto /></ProtectedRoute>}/>
+          <Route path="/Listaventaadmin" element={<ProtectedRoute isAdmin={true}>< Listaventaadmin/></ProtectedRoute>}/>
           </Routes>
         </div>
       
