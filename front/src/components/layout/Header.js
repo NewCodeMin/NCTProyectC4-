@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
+import Search from "./search";
 import { Link } from "react-router-dom";
 import {  useDispatch, useSelector } from "react-redux";
 import { useAlert } from 'react-alert'
 import { logout} from "../../actions/userActions"
 
 const Header = () => {
+  const {cartItems} = useSelector(state=>state.cart)
   const alert= useAlert();
   const dispatch= useDispatch();
 
@@ -18,18 +20,16 @@ const Header = () => {
         <Fragment>
             <nav class="navbar navbar-dark bg-white ">
         <div class="container-fluid">
-            <img src="./images/bannert.png "  alt="logo" id = "imagenavbar"/>  
-          <form class="d-flex " id="buscador" role="search">
-            <input class="form-control me-2 id " id= "buscarnav" type="search" placeholder="¿Qué buscas?" aria-label="Search"/>
-            <button class="btn btn-success "  id= "buscarbotom" type="submit">Buscar</button>
-          </form>
+            <img src="../images/bannert.png "  alt="logo" id = "imagenavbar"/>  
+            <Search />
           <div class="navbar-brand  d-md-flex ">
             <div class="final"> 
             <div class="d-flex flex-row-reverse">
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                     <span class="navbar-toggler-icon"></span>
                   </button>
-            <a class="nav-link" href=" "> <span class="fa fa-shopping-cart"  id="cart_shopping"></span> <span className="ml-0" id="cart_count">0</span> </a>
+            <Link to="/carrito"><i class="fa fa-shopping-cart fa-2x text-white" aria-hidden="false"></i>
+                  <span className="ml-1" id="cart_count">{cartItems.length}</span></Link>
             {user ? (
                   <div className="ml-1 dropdown d-inline">
                     <Link
@@ -57,12 +57,17 @@ const Header = () => {
                     >
                       {/*Preguntamos el rol de quien esta online*/}
                       {user && user.role === "admin" && (
-                        <Link className="dropdown-item" to="/dashboard">
+                        <Link className="dropdown-item" to="/listaproductoadmin">
                           Adm. Productos
                         </Link>
                       )}
+                       {user && user.role === "admin" && (
+                        <Link className="dropdown-item" to="/Listaventaadmin">
+                          Mis ventas
+                        </Link>
+                      )}
 
-                      <Link className="dropdown-item" to="/">
+                      <Link className="dropdown-item" to="/myOrders">
                         Pedidos
                       </Link>
                       <Link className="dropdown-item" to="/yo">

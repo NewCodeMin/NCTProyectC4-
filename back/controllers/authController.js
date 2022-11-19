@@ -15,7 +15,8 @@ exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
         width:240,
         crop:"scale"
     })
-
+    
+    
     const user = await User.create({
         nombre,
         email,
@@ -26,6 +27,7 @@ exports.registroUsuario= catchAsyncErrors(async (req, res, next) =>{
         }
     })
     tokenEnviado(user,201,res)
+    console.log(password)
 })
 
 //Iniciar Sesion - Login

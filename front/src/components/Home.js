@@ -16,26 +16,8 @@ const Home = () => {
                             <p>DEPORTIVOS</p>
                             <div class="text-center">
                             <Link to="/VistaClientes">
-                                <button class="btn order-button" >Vista para clientes</button>
-                            </Link>
-                            <Link to="/Listaventaadmin">
-                                <button class="btn order-button" >Lista ventas para admin</button>
-                            </Link>
-                            <Link to="/listaproductoadmin">
-                                <button class="btn order-button" >Lista productos para admin</button>
-                            </Link>
-                            <Link to="/IngresarProducto">
-                                <button class="btn order-button" >Ingresar producto</button>
-                            </Link>
-                            <Link to="/ModificarProducto/635b90b93ee13359fb6c5a78">
-                                <button class="btn order-button" >Modificar producto</button>
-                            </Link>
-                            <Link to="/DetallesProducto/635b90b93ee13359fb6c5a78">
-                                <button class="btn order-button" >Detalles producto</button>
-                            </Link>
-                            <Link to="/carrito">
-                                <button class="btn order-button" >Carrito</button>
-                            </Link>
+                                <button class="btn order-button" >Ver productos en venta</button>
+                            </Link>                    
                             </div>
                         </div>
                     </div>
