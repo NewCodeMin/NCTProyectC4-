@@ -1,2 +1,3 @@
 Instalacion:
 npm i react-native-uuid (crea id automatico)
+npm i mdbreact
