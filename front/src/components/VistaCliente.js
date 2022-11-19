@@ -1,26 +1,35 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import MetaData from './layout/MetaData'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductsDispo } from '../actions/productActions'
-import { Link } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useAlert } from 'react-alert'
+import Pagination from 'react-js-pagination'
 
 export const VistaCliente = () => {
-  const { loading, productosDispo, error } = useSelector(state => state.productsDispo)
+  const params = useParams();
+  const keyword = params.keyword;
+  const [currentPage, setCurrentPage] = useState(1)
+  const { loading, productosDispo, error, resPerPage, productsCount } = useSelector(state => state.productsDispo)
   const alert = useAlert();
+
   const dispatch = useDispatch();
   useEffect(() => {
     if (error) {
       return alert.error(error)
     }
-    dispatch(getProductsDispo());
-    alert.success("OK")
-  }, [dispatch])
+
+    dispatch(getProductsDispo(currentPage, keyword));
+  }, [dispatch, alert, error, currentPage, keyword])
+
+  function setCurrentPageNo(pageNumber) {
+    setCurrentPage(pageNumber)
+  }
   return (
     <Fragment>
       {loading ? <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i> : (
         <Fragment>
-          <MetaData title="Ejemplo clase "></MetaData>
+          <MetaData title="Vista Cliente "></MetaData>
           <h1 id="encabezado_productos">Lista de productos cliente </h1>
           <section id="productos" class='container mt-5'>
             <div class='row'>
@@ -34,9 +43,7 @@ export const VistaCliente = () => {
                     <div class='card-body d-flex flex-column'>
                       <h5 id="titulo_producto"><Link to={`/DetallesProducto/${producto._id}`}>{producto.nombre}</Link></h5>
                       <div class='rating mt-auto'>
-                        <div class='rating-outer'>
-                          <div class='rating-inner'></div>
-                        </div>
+
                         <span id="Stock_Und">Stock {producto.inventario} Und</span>
                       </div>
                       <p class='card-text'>${producto.precio}</p><Link to={`/DetallesProducto/${producto._id}`} id="view_btn" className='btn btn-block'>
@@ -48,6 +55,20 @@ export const VistaCliente = () => {
               ))}
             </div>
           </section>
+          <div className='d-flex justify-content-center mt-5'>
+            <Pagination
+              activePage={currentPage}
+              itemsCountPerPage={resPerPage}
+              totalItemsCount={productsCount}
+              onChange={setCurrentPageNo}
+              nextPageText={'Siguiente'}
+              prevPageText={'Anterior'}
+              firstPageText={'Primera'}
+              lastPageText={'Ultima'}
+              itemClass='page-item'
+              linkClass='page-link'
+            />
+          </div>
         </Fragment>
       )}
     </Fragment>

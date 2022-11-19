@@ -30,11 +30,7 @@ const orderSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        marca: {
-            type: String,
-            required: true
-        },        
-        talla: {
+        cantidad: {
             type: Number,
             required: true
         },
@@ -42,7 +38,6 @@ const orderSchema = mongoose.Schema({
             type: String,
             required: true
         },
-        
         precio: {
             type: Number,
             required: true
@@ -51,10 +46,6 @@ const orderSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             required: true,
             ref: "productos"
-        },
-        cantidad: {
-            type: Number,
-            required: true
         }
     }
     ],
@@ -73,11 +64,6 @@ const orderSchema = mongoose.Schema({
         type:Number,
         required: true,
         default: 0.0
-    },
-    descuento:{
-        type:Number,
-        required: true,
-        defautl: 0.0
     },
     precioImpuesto:{
         type:Number,
