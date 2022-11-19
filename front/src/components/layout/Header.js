@@ -57,8 +57,13 @@ const Header = () => {
                     >
                       {/*Preguntamos el rol de quien esta online*/}
                       {user && user.role === "admin" && (
-                        <Link className="dropdown-item" to="/dashboard">
+                        <Link className="dropdown-item" to="/listaproductoadmin">
                           Adm. Productos
+                        </Link>
+                      )}
+                       {user && user.role === "admin" && (
+                        <Link className="dropdown-item" to="/Listaventaadmin">
+                          Mis ventas
                         </Link>
                       )}
 
