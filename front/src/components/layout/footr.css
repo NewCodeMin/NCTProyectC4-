@@ -30,13 +30,13 @@ footer .footer_container .footr_details_one p{
 
 
 footer .lastdetails{
-    background-color: #131A22;
+    background-color: #000000;
     height:20vh;
 }
 
 footer img{
     display: block;
-    width: 80px;
+    width: 200px;
     margin: 50px auto auto auto;
     text-align: center;
     padding-top: 30px;

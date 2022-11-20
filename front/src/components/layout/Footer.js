@@ -34,7 +34,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="lastdetails">
-                <img src="./public/images/zapatos_deportivos.png" alt="logo" />
+                <img src="../images/bannert.png" alt="logo" />
                 <p>Condiciones de uso y venta &nbsp; &nbsp;&nbsp;  Todos los derechos reservados. &nbsp; &nbsp;&nbsp;  Teléfono (571) 4842220. Dirección: Calle 99 #14-49 Piso 9, Bogotá Colombia. E-mail de notificaciones : notificaciones@tiendadezapatos.com  &nbsp; &nbsp;&nbsp;  © 2022-{year}, tiendadezapatos.com, Inc. or its affiliates</p>
             </div>
         </footer>
