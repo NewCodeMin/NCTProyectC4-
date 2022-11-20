@@ -1,6 +1,7 @@
 import './styles.css';
 import React, { useEffect } from 'react';
 import Header from './components/layout/Header';
+import Footer from './components/layout/Footer';
 import IngresarProducto from './components/IngresarProductos';
 import Listaproadmin from './components/Listaproadmin';
 import ModificarProducto from './components/ModificarProductos';
@@ -81,7 +82,7 @@ function App() {
               element={<ProtectedRoute isAdmin={true}><ProcessOrder /></ProtectedRoute>} />
           </Routes>
         </div>
-
+<Footer />
       </div>
     </Router>
   );

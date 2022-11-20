@@ -506,15 +506,6 @@ header {
     color: grey;
     margin-left: 0.5rem;
   }
-  
-  /* Footer */
-  footer {
-    margin-top: 8rem;
-    color: grey;
-    bottom: 0;
-    width: 100%;
-  }
-  
   /* Ratings */
   
   .rating-outer {
