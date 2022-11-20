@@ -19,7 +19,11 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import { Shipping } from './components/Shipping';
 import { ConfirmOrder } from './components/ConfirmOrder';
 import { Payment } from './components/Payment';
-import { Success } from './components/Success'
+import { Success } from './components/Success';
+import { UpdateProfile } from "./components/user/UpdateProfile"
+import { UpdatePassword } from './components/user/UpdatePassword';
+import { ForgotPassword } from "./components/user/ForgotPassword"
+import { NewPassword } from './components/user/NewPassword';
 
 
 //Router traido desde react-router-dom (no confundir con el de express)
@@ -51,6 +55,11 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/yo" element={<Profile />} />
+            <Route path="/yo/update" element={<UpdateProfile />} />
+            <Route path="/password/update" element={<UpdatePassword />} />
+            <Route path="/password/forgot" element={<ForgotPassword />} />
+            <Route path="/resetPassword/:token" element={<NewPassword />} />
+            
 
             {/*Ruta protegida*/}
             <Route path="/IngresarProducto" element={<ProtectedRoute isAdmin={true}><IngresarProducto /></ProtectedRoute>} />
